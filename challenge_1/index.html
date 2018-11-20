@@ -6,36 +6,36 @@
   <title>Tic Tac Toe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="app.js"></script>
 </head>
 <body>
 <h1>Tic Tac Toe</h1>
-<button onclick="">New Game</button>
+<button onclick="test">New Game</button>
 <h4>Winner:</h4>
-<h4>Player's Turn:</h4>
+<h4 id="turn">Player Turn: X</h4>
 <table>
   <tr>
     <td>
-      <button id="one"></button>
-      <button id="two"></button>
-      <button id="three"></button>
+      <button id="one" onclick="clicker(id)">--</button>
+      <button id="two" onclick="clicker(id)">--</button>
+      <button id="three" onclick="clicker(id)">--</button>
     </td>
   </tr>
   <tr>
     <td>
-      <button id="four"></button>
-      <button id="five"></button>
-      <button id="six"></button>
+      <button id="four" onclick="clicker(id)">--</button>
+      <button id="five" onclick="clicker(id)">--</button>
+      <button id="six" onclick="clicker(id)">--</button>
     </td>
   </tr>
   <tr>
     <td>
-      <button id="seven"></button>
-      <button id="eight"></button>
-      <button id="nine"></button>
+      <button id="seven" onclick="clicker(id)">--</button>
+      <button id="eight" onclick="clicker(id)">--</button>
+      <button id="nine" onclick="clicker(id)">--</button>
     </td>
   </tr>
 </table>
+<script src="app.js"></script>
 </body>
 </html>
 
