@@ -9,29 +9,29 @@
 </head>
 <body>
 <h1>Tic Tac Toe</h1>
-<button onclick="newGame()">New Game</button>
+<button onclick="listeners.newGame()">New Game</button>
 <h4 id="winner">Winner:</h4>
 <h4 id="turn">Player Turn: X</h4>
 <table>
   <tr>
     <td>
-      <button id="one" onclick="clicker(id)">--</button>
-      <button id="two" onclick="clicker(id)">--</button>
-      <button id="three" onclick="clicker(id)">--</button>
+      <button class="square" id="one" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="two" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="three" onclick="listeners.clicker(id)">--</button>
     </td>
   </tr>
   <tr>
     <td>
-      <button id="four" onclick="clicker(id)">--</button>
-      <button id="five" onclick="clicker(id)">--</button>
-      <button id="six" onclick="clicker(id)">--</button>
+      <button class="square" id="four" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="five" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="six" onclick="listeners.clicker(id)">--</button>
     </td>
   </tr>
   <tr>
     <td>
-      <button id="seven" onclick="clicker(id)">--</button>
-      <button id="eight" onclick="clicker(id)">--</button>
-      <button id="nine" onclick="clicker(id)">--</button>
+      <button class="square" id="seven" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="eight" onclick="listeners.clicker(id)">--</button>
+      <button class="square" id="nine" onclick="listeners.clicker(id)">--</button>
     </td>
   </tr>
 </table>
