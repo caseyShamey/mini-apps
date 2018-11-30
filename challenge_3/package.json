@@ -1,0 +1,37 @@
+{
+  "name": "challenge_3",
+  "version": "1.0.0",
+  "description": "checkout",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "babel": "babel client --out-dir public --presets=env,react --source-maps inline --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caseyShamey/rpt10-mini-apps.git"
+  },
+  "author": "Casey Shamey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caseyShamey/rpt10-mini-apps/issues"
+  },
+  "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.2.0",
+    "eslint": "^5.9.0",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}

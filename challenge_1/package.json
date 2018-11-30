@@ -1,0 +1,22 @@
+{
+  "name": "challenge_1",
+  "version": "1.0.0",
+  "description": "Tic Tac Toe",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caseyShamey/rpt10-mini-apps.git"
+  },
+  "author": "Casey Shamey <caseyshamey@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caseyShamey/rpt10-mini-apps/issues"
+  },
+  "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
+  "dependencies": {
+    "underscore": "^1.9.1"
+  }
+}

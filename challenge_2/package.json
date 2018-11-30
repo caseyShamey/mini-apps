@@ -1,0 +1,29 @@
+{
+  "name": "challenge_2",
+  "version": "1.0.0",
+  "description": "Checkout Program",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caseyShamey/rpt10-mini-apps.git"
+  },
+  "author": "Casey Shamey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caseyShamey/rpt10-mini-apps/issues"
+  },
+  "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.4"
+  }
+}
