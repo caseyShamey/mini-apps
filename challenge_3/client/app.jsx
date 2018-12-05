@@ -4,17 +4,32 @@ class App extends React.Component {
     this.handleHomepageClick = this.handleHomepageClick.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePurchaseClick = this.handlePurchaseClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       current: <Homepage onHomepageClick={this.handleHomepageClick} />,
       location: "Homepage",
-      next: null
+      next: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      streetAddress: '',
+      cityStateZip: '',
+      phoneNum: '',
+      ccNum: '',
+      expirDate: '',
+      zip: ''
     }
+  }
+
+  handleChange (e) {
+    this.setState({ [e.target.name]: e.target.value});
   }
 
   handleHomepageClick() {
     this.setState(
       {
-        current: <F1 />,
+        current: <F1 onHandleChange={this.handleChange} />,
         location: "F1",
         next: <Next onNextClick={this.handleNextClick} />
       }
@@ -22,35 +37,90 @@ class App extends React.Component {
   }
 
   handleNextClick() {
+
     if (this.state.location === "Homepage") {
       this.setState(
         {
-          current: <F1 />,
+          current: <F1 onHandleChange={this.handleChange} />,
           location: "F1"
         }
       )
     } else if (this.state.location === "F1") {
-      this.setState(
-        {
-          current: <F2 />,
-          location: "F2"
-        }
-      )
+
+      var jsonState = JSON.stringify(this.state);
+
+        fetch('/F', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonState
+        }).catch((err) => {
+          console.error(err)
+        }).then(res => console.log('Success!', res.text()))
+
+        this.setState(
+          {
+            current: <F2 onHandleChange={this.handleChange} />,
+            location: "F2",
+          }
+          )
+
     } else if (this.state.location === "F2") {
+
+      var jsonState = JSON.stringify(this.state);
+
+        fetch('/F', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonState
+        }).catch((err) => {
+          console.error(err)
+        }).then(res => console.log('Success!', res.text()))
+
       this.setState(
         {
-          current: <F3 />,
+          current: <F3 onHandleChange={this.handleChange} />,
           location: "F3"
         }
       )
     } else if (this.state.location === "F3") {
+
+      var jsonState = JSON.stringify(this.state);
+
+        fetch('/F', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonState
+        }).catch((err) => {
+          console.error(err)
+        }).then(res => console.log('Success!', res.text()))
+
       this.setState(
         {
-          current: <Confirmation onPurchaseClick={this.handlePurchaseClick} />,
+          current: <Confirmation onPurchaseClick={this.handlePurchaseClick} appState={this.state} />,
           location: "Confirmation",
           next: null
         }
       )
+
+      fetch('/confirm')
+        .catch(err => {
+          console.error(err)
+        })
+        .then(res => {
+          return res.json()
+        },
+        (err) =>{
+          console.error(err)
+        })
+        .then(res => {
+          console.log('array', res[0])
+        })
     }
   }
 
@@ -59,7 +129,17 @@ class App extends React.Component {
       {
         current: <Homepage onHomepageClick={this.handleHomepageClick} />,
         location: "Homepage",
-        next: null
+        next: null,
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        streetAddress: '',
+        cityStateZip: '',
+        phoneNum: '',
+        ccNum: '',
+        expirDate: '',
+        zip: '',
       }
     )
   }
@@ -117,17 +197,12 @@ class Next extends React.Component {
 class F1 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    }
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value});
+    this.props.onHandleChange(e);
   }
 
   render() {
@@ -170,16 +245,12 @@ class F1 extends React.Component {
 class F2 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      streetAddress: '',
-      cityStateZip: '',
-      phoneNum: ''
-    }
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value});
+    this.props.onHandleChange(e);
   }
 
   render() {
@@ -215,16 +286,12 @@ class F2 extends React.Component {
 class F3 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ccNum: '',
-      expirDate: '',
-      zip: ''
-    }
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange (e) {
-    this.setState({ [e.target.name]: e.target.value});
+    this.props.onHandleChange(e);
   }
 
   render() {
@@ -268,9 +335,19 @@ class Confirmation extends React.Component {
   }
 
   render() {
+    console.log('Confirm state', this.props)
     return(
       <div>
         <h2>Confirmation</h2>
+        <p>First Name: {this.props.appState.firstName}</p>
+        <p>Last Name: {this.props.appState.lastName}</p>
+        <p>Email: {this.props.appState.email}</p>
+        <p>Street Address: {this.props.appState.streetAddress}</p>
+        <p>City, State, Zip: {this.props.appState.cityStateZip}</p>
+        <p>Phone Number: {this.props.appState.phoneNum}</p>
+        <p>Credit Card Number: {this.props.appState.ccNum}</p>
+        <p>Expiration Date: {this.props.appState.expirDate}</p>
+        <p>Zip Code: {this.props.appState.zip}</p>
         <button onClick={this.handleClick}>
           Purchase
         </button>
