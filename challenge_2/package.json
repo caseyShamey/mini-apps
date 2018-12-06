@@ -1,23 +1,25 @@
 {
-  "name": "challenge_1",
+  "name": "challenge_2",
   "version": "1.0.0",
-  "description": "Tic Tac Toe",
-  "main": "app.js",
+  "description": "CSV Report Generator",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/caseyShamey/rpt10-mini-apps.git"
   },
-  "author": "Casey Shamey <caseyshamey@gmail.com>",
+  "author": "Casey Shamey",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/caseyShamey/rpt10-mini-apps/issues"
   },
   "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
   "dependencies": {
-    "gsap": "^2.0.2",
-    "underscore": "^1.9.1"
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "nodemon": "^1.18.7"
   }
 }
