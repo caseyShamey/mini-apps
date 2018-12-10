@@ -1,12 +1,29 @@
 var state = {
   turnTracker: "X",
-  currentBoard: {},
-  win: false
+  currentBoard: {
+    one: "  ",
+    two: "  ",
+    three: "  ",
+    four: "  ",
+    five: "  ",
+    six: "  ",
+    seven: "  ",
+    eight: "  ",
+    nine: "  "
+  },
+  win: false,
 }
 
 var changeState = (id, change) => {
   document.getElementById(id).innerHTML = change;
 }
+
+var changeClass = (id, cl) => {
+  var elem = document.getElementById(id)
+  elem.classList.toggle(cl)
+}
+
+
 
 var listeners = {
   clicker: (id) => {
@@ -15,8 +32,10 @@ var listeners = {
     } else if (state.win) {
       //can't make moves after win
     } else if (state.turnTracker === "X") {
-      document.getElementById(id).innerHTML = "X"
+      changeClass(id, "xsquare")
       state.currentBoard[id] = "X"
+      randomize()
+      console.log(state.currentBoard)
       winChecker(state.turnTracker)
       tieChecker()
       state.turnTracker = "O"
@@ -24,8 +43,10 @@ var listeners = {
         document.getElementById("turn").innerHTML = "Player Turn: O"
       }
     } else {
-      document.getElementById(id).innerHTML = "O"
+      changeClass(id, "osquare")
       state.currentBoard[id] = "O"
+      randomize()
+      console.log(state.currentBoard)
       winChecker(state.turnTracker)
       tieChecker()
       state.turnTracker = "X"
@@ -37,11 +58,12 @@ var listeners = {
 
   newGame: () => {
     for (var elem in state.currentBoard) {
-      document.getElementById(elem).innerHTML = "--"
+      document.getElementById(elem).innerHTML = "  "
     }
     state.turnTracker = "X";
     state.currentBoard = {};
     state.win = false;
+    state.randomizer = false;
     document.getElementById("turn").innerHTML = "Player Turn: X"
     document.getElementById("winner").innerHTML = "Winner:"
 
@@ -54,15 +76,15 @@ var listeners = {
 
 var tieChecker = () => {
   if (
-    state.currentBoard.one &&
-    state.currentBoard.two &&
-    state.currentBoard.three &&
-    state.currentBoard.four &&
-    state.currentBoard.five &&
-    state.currentBoard.six &&
-    state.currentBoard.seven &&
-    state.currentBoard.eight &&
-    state.currentBoard.nine
+    state.currentBoard.one !== "  " &&
+    state.currentBoard.two !== "  " &&
+    state.currentBoard.three !== "  " &&
+    state.currentBoard.four !== "  " &&
+    state.currentBoard.five !== "  " &&
+    state.currentBoard.six !== "  " &&
+    state.currentBoard.seven !== "  " &&
+    state.currentBoard.eight !== "  " &&
+    state.currentBoard.nine !== "  "
   ) {
     document.getElementById("winner").innerHTML = "Tie Game"
   }
@@ -109,38 +131,63 @@ var winChecker = (turnTracker) => {
   }
 }
 
-var quadrantItems = document.querySelectorAll('.quadrant__item');
-var svgs = document.querySelectorAll('svg');
-var cube = document.querySelector('.cube');
-var closeButton = document.querySelector('.quadrant__item__content--close');
-var isInside = false;
 
-var tl = new TimelineLite({paused: true});
-tl.timeScale(1.6);
 
-tl.to('.cube', 0.4, {rotation: 45, width: '120px', height: '120px', ease: Expo.easeOut}, 'first');
-tl.to('.plus .plus-vertical', 0.3, {height: '0', backgroundColor: '#f45c41', ease: Power1.easeIn}, 'first');
-tl.to('.plus .plus-horizontal', 0.3, {width: '0', backgroundColor: '#f45c41', ease: Power1.easeIn}, 'first');
-tl.to('.cube', 0, {backgroundColor: 'transparent'});
-tl.to(quadrantItems[0], 0.15, {x: -5, y: -5}, 'seperate');
-tl.to('.arrow-up', 0.2, {opacity: 1, y: 0}, 'seperate+=0.2');
-tl.to(quadrantItems[1], 0.15, {x: 5, y: -5}, 'seperate');
-tl.to('.arrow-right', 0.2, {opacity: 1, x: 0}, 'seperate+=0.2');
-tl.to(quadrantItems[3], 0.15, {x: 5, y: 5}, 'seperate');
-tl.to('.arrow-down', 0.2, {opacity: 1, y: 0}, 'seperate+=0.2');
-tl.to(quadrantItems[2], 0.15, {x: -5, y: 5}, 'seperate');
-tl.to('.arrow-left', 0.2, {opacity: 1, x: 0}, 'seperate+=0.2');
 
-cube.addEventListener('mouseenter', playTimeline);
-cube.addEventListener('mouseleave', reverseTimeline);
 
-function playTimeline(e) {
-  e.stopPropagation();
-  tl.play();
-}
+var randomize = () => {
 
-function reverseTimeline(e) {
-  e.stopPropagation();
-  tl.timeScale(1.8);
-  tl.reverse();
+  var makeRandom = function(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  var rand = makeRandom(1, 3);
+    function cond(id, chg) {
+      if (chg === "X") {
+        changeClass(id, "xsquare")
+      } else if (chg === "O") {
+        changeClass(id, "osquare")
+      } else {
+        changeClass(id, "neutralSquare")
+      }
+    }
+
+  if (rand === 1) {
+    var boardCopy = Object.assign(state.currentBoard)
+
+    var one = boardCopy.one
+    var two =  boardCopy.two
+    var three = boardCopy.three
+    var four =  boardCopy.four
+    var six =  boardCopy.six
+    var seven =  boardCopy.seven
+    var eight =  boardCopy.eight
+    var nine =  boardCopy.nine
+
+    state.currentBoard.one = two
+    //cond(one, two)
+
+    state.currentBoard.two = three
+    //cond(two, three)
+
+    state.currentBoard.three = six
+    //cond(three, six)
+
+    state.currentBoard.four = one
+    //cond(four, one)
+
+    state.currentBoard.six = nine
+    //cond(six, nine)
+
+    state.currentBoard.seven = four
+    //cond(seven, four)
+
+    state.currentBoard.eight = seven
+    //cond(eight, seven)
+
+    state.currentBoard.nine = eight
+    //cond(nine, eight)
+  }
 }

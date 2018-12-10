@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
-    "nodemon": "^1.18.7"
+    "jsdom": "^13.0.0",
+    "nodemon": "^1.18.7",
+    "objects-to-csv": "^1.2.1"
   }
 }
