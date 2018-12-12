@@ -16,25 +16,56 @@ app.use(bodyParser.json())
 
 app.post('/csv', (req, res) => {
   //console.log('req.body', req.body)
-  var arrayData = [req.body]
-  printCsv(arrayData)
+  res.send(convertToCsv(JSON.parse(req.body.formData)))
 })
 
 var convertToCsv = (data) => {
-  //use recursion to flatten into array of objects
-  //create an array of keys
-  //set each key equal to an object with single key value pair key and array
-  //if the value is equal to
-
+  var results = [];
   var keys = [];
-  var values = [];
-  for (var i in data) {
-
-    this[i] = {i: [data[i]]}
-    keys.push(this[i])
+  //use recursion to flatten into array of objects
+  var arr = flatten(data)
+  arr.forEach(el => {
+    delete el.children
+  })
+  //get titles of csv table from object keys
+  for (var key in arr[0]) {
+    keys.push(key)
   }
-  return keys
+  results.push(
+    function() {
+      var keyStr = ''
+      keys.forEach(el => {
+        keyStr += ',' + el
+      })
+      return keyStr.substr(1)
+    }()
+  )
+  //for each element get properly formatted list
+  arr.forEach(el => {
+    reduceObj(el, results);
+  })
+  return results;
 }
+
+var reduceObj = (obj, resultsArr) => {
+  var str = "";
+  for (var el in obj) {
+    str += ',' + obj[el]
+  }
+  resultsArr.push(str.substr(1))
+}
+
+var flatten = (data, results = []) => {
+  console.log('data', typeof data)
+  results.push(data);
+  if (data.children.length > 0) {
+    data.children.forEach(child => {
+      flatten(child, results)
+    })
+  }
+  return results;
+}
+
 
 
 app.listen(port, () => console.log(`app listening on port ${port}`))
