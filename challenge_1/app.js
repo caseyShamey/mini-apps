@@ -34,7 +34,7 @@ var listeners = {
     } else if (state.turnTracker === "X") {
       changeClass(id, "xsquare")
       state.currentBoard[id] = "X"
-      randomize()
+      //randomize()
       console.log(state.currentBoard)
       winChecker(state.turnTracker)
       tieChecker()
@@ -45,7 +45,7 @@ var listeners = {
     } else {
       changeClass(id, "osquare")
       state.currentBoard[id] = "O"
-      randomize()
+      //randomize()
       console.log(state.currentBoard)
       winChecker(state.turnTracker)
       tieChecker()
@@ -58,14 +58,30 @@ var listeners = {
 
   newGame: () => {
     for (var elem in state.currentBoard) {
-      document.getElementById(elem).innerHTML = "  "
+      if (state.currentBoard[elem] === "X") {
+        changeClass(elem.toString(), 'xsquare')
+      } else if (state.currentBoard[elem] === "O") {
+        changeClass(elem.toString(), 'osquare')
+      }
     }
+
     state.turnTracker = "X";
     state.currentBoard = {};
     state.win = false;
     state.randomizer = false;
+    state.currentBoard.one = "  ";
+    state.currentBoard.two = "  ";
+    state.currentBoard.three = "  ";
+    state.currentBoard.four = "  ";
+    state.currentBoard.five = "  ";
+    state.currentBoard.six = "  ";
+    state.currentBoard.seven = "  ";
+    state.currentBoard.eight = "  ";
+    state.currentBoard.nine = "  ";
+
     document.getElementById("turn").innerHTML = "Player Turn: X"
     document.getElementById("winner").innerHTML = "Winner:"
+    console.log('reset', state.currentBoard)
 
   }
 
@@ -135,59 +151,59 @@ var winChecker = (turnTracker) => {
 
 
 
-var randomize = () => {
+// var randomize = () => {
 
-  var makeRandom = function(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+//   var makeRandom = function(min, max) {
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
 
-  var rand = makeRandom(1, 3);
-    function cond(id, chg) {
-      if (chg === "X") {
-        changeClass(id, "xsquare")
-      } else if (chg === "O") {
-        changeClass(id, "osquare")
-      } else {
-        changeClass(id, "neutralSquare")
-      }
-    }
+//   var rand = makeRandom(1, 3);
+//     function cond(id, chg) {
+//       if (chg === "X") {
+//         changeClass(id, "xsquare")
+//       } else if (chg === "O") {
+//         changeClass(id, "osquare")
+//       } else {
+//         changeClass(id, "neutralSquare")
+//       }
+//     }
 
-  if (rand === 1) {
-    var boardCopy = Object.assign(state.currentBoard)
+//   if (rand === 1) {
+//     var boardCopy = Object.assign(state.currentBoard)
 
-    var one = boardCopy.one
-    var two =  boardCopy.two
-    var three = boardCopy.three
-    var four =  boardCopy.four
-    var six =  boardCopy.six
-    var seven =  boardCopy.seven
-    var eight =  boardCopy.eight
-    var nine =  boardCopy.nine
+//     var one = boardCopy.one
+//     var two =  boardCopy.two
+//     var three = boardCopy.three
+//     var four =  boardCopy.four
+//     var six =  boardCopy.six
+//     var seven =  boardCopy.seven
+//     var eight =  boardCopy.eight
+//     var nine =  boardCopy.nine
 
-    state.currentBoard.one = two
-    //cond(one, two)
+//     state.currentBoard.one = two
+//     //cond(one, two)
 
-    state.currentBoard.two = three
-    //cond(two, three)
+//     state.currentBoard.two = three
+//     //cond(two, three)
 
-    state.currentBoard.three = six
-    //cond(three, six)
+//     state.currentBoard.three = six
+//     //cond(three, six)
 
-    state.currentBoard.four = one
-    //cond(four, one)
+//     state.currentBoard.four = one
+//     //cond(four, one)
 
-    state.currentBoard.six = nine
-    //cond(six, nine)
+//     state.currentBoard.six = nine
+//     //cond(six, nine)
 
-    state.currentBoard.seven = four
-    //cond(seven, four)
+//     state.currentBoard.seven = four
+//     //cond(seven, four)
 
-    state.currentBoard.eight = seven
-    //cond(eight, seven)
+//     state.currentBoard.eight = seven
+//     //cond(eight, seven)
 
-    state.currentBoard.nine = eight
-    //cond(nine, eight)
-  }
-}
+//     state.currentBoard.nine = eight
+//     //cond(nine, eight)
+//   }
+// }
