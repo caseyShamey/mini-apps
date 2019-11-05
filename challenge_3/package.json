@@ -30,7 +30,7 @@
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "mocha": "^5.2.0",
-    "mongoose": "^5.3.14",
+    "mongoose": "^5.7.5",
     "mysql": "^2.16.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
