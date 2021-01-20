@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/caseyShamey/rpt10-mini-apps#readme",
   "dependencies": {
-    "gsap": "^2.0.2",
+    "gsap": "^3.6.0",
     "underscore": "^1.9.1"
   }
 }
